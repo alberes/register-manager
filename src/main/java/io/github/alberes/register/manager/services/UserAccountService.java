@@ -1,0 +1,57 @@
+package io.github.alberes.register.manager.services;
+
+import io.github.alberes.register.manager.domains.UserAccount;
+import io.github.alberes.register.manager.repositories.UserAccountRepository;
+import io.github.alberes.register.manager.services.exceptions.DuplicateRecordException;
+import io.github.alberes.register.manager.services.exceptions.ObjectNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.UUID;
+
+@Service
+@RequiredArgsConstructor
+public class UserAccountService {
+
+    private final UserAccountRepository repository;
+
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+
+    public UserAccount save(UserAccount userAccount){
+        UserAccount userAccountDB = this.repository.findByEmail(userAccount.getEmail());
+        if(userAccountDB != null){
+            throw new DuplicateRecordException("Registration with e-mail " + userAccount.getEmail() + " has already been registered!");
+        }
+        String password = this.encoder.encode(userAccount.getPassword());
+        userAccount.setRoles(new HashSet<String>());
+        userAccount.getRoles().add("USER");
+        userAccount.setPassword(password);
+        return this.repository.save(userAccount);
+    }
+
+    public UserAccount find(UUID id){
+        Optional<UserAccount> optional = this.repository.findById(id);
+        return optional.orElseThrow(() -> new ObjectNotFoundException(
+                "Object not found! Id: " + id.toString() + ", Type: " + UserAccount.class.getName()));
+    }
+
+    public void update(UserAccount userAccount){
+        UserAccount userAccountDB = this.find(userAccount.getId());
+        userAccountDB.setName(userAccount.getName());
+        this.repository.save(userAccountDB);
+    }
+
+    public void delete(UUID id){
+        this.find(id);
+        this.repository.deleteById(id);
+    }
+
+    public boolean notExistsEmail(String email){
+        UserAccount userAccount = this.repository.findByEmail(email);
+        return userAccount == null;
+    }
+
+}

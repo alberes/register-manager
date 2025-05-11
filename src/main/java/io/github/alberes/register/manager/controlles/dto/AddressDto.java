@@ -1,0 +1,30 @@
+package io.github.alberes.register.manager.controlles.dto;
+
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+public record AddressDto(
+        @NotBlank(message = "Obligatory field")
+        @Size(min = 10, max = 100, message = "Fill this field with size between 10 and 100")
+        String publicArea,
+        @NotNull(message = "Obligatory field")
+        @Min(value = 1, message = "Fill this field greater than 0")
+        Integer number,
+        @NotBlank(message = "Obligatory field")
+        @Size(min = 10, max = 100, message = "Fill this field with size between 10 and 100")
+        String additionalAddress,
+        @NotBlank(message = "Obligatory field")
+        @Size(min = 10, max = 100, message = "Fill this field with size between 10 and 100")
+        String neighborhood,
+        @NotBlank(message = "Obligatory field")
+        @Size(min = 10, max = 100, message = "Fill this field with size between 10 and 100")
+        String city,
+        @NotBlank(message = "Obligatory field")
+        @Size(min = 10, max = 100, message = "Fill this field with size between 10 and 100")
+        String state,
+        @NotBlank(message = "Obligatory field")
+        @Size(min = 8, max = 8, message = "Fill this field with size between 10 and 100")
+        String zipCode) {
+}
