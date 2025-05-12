@@ -10,7 +10,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,6 +23,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserAccountValidationFilter extends OncePerRequestFilter {
 
+    private static final String IGNORED_PATH = "/api/v1/users";
+
     private final JsonUtils jsonUtils = new JsonUtils(new ObjectMapper()
             .registerModule(new JavaTimeModule()));
 
@@ -31,9 +32,8 @@ public class UserAccountValidationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
-        String []paths = request.getRequestURI().split("/");
-        String id = paths[paths.length - 1];
-        if(!this.hasRoleAdmin(userPrincipal.getAuthorities())){
+        if(!IGNORED_PATH.equals(request.getRequestURI()) && !this.hasRoleAdmin(userPrincipal.getAuthorities())){
+            String id = extractUserId(request.getRequestURI());
             if(!id.equals(userPrincipal.getId().toString())){
                 StandardErrorDto standardErrorDto =
                         new StandardErrorDto(System.currentTimeMillis(),
@@ -46,9 +46,12 @@ public class UserAccountValidationFilter extends OncePerRequestFilter {
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("application/json");
                 response.getWriter().println(this.jsonUtils.toJson(standardErrorDto));
+            }else{
+                filterChain.doFilter(request, response);
             }
+        }else {
+            filterChain.doFilter(request, response);
         }
-        filterChain.doFilter(request, response);
     }
 
     private boolean hasRoleAdmin(Collection<? extends GrantedAuthority> roles){
@@ -58,6 +61,10 @@ public class UserAccountValidationFilter extends OncePerRequestFilter {
             }
         }
         return false;
+    }
+
+    private String extractUserId(String path){
+        return path.split("/")[4];
     }
 
 }

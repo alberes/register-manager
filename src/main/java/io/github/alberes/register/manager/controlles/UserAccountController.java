@@ -4,14 +4,12 @@ import io.github.alberes.register.manager.controlles.dto.UserAccountDto;
 import io.github.alberes.register.manager.controlles.dto.UserAccountUpdateDto;
 import io.github.alberes.register.manager.controlles.mappers.UserAccountMapper;
 import io.github.alberes.register.manager.domains.UserAccount;
-import io.github.alberes.register.manager.domains.UserPrincipal;
 import io.github.alberes.register.manager.services.UserAccountService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -65,5 +63,23 @@ public class UserAccountController implements GenericController{
         UUID userId = UUID.fromString(id);
         this.service.delete(userId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    public ResponseEntity<Page<UserAccountDto>> page(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+            @RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
+            @RequestParam(value = "direction", defaultValue = "ASC") String direction
+    ){
+        Page<UserAccount> pageUsers = this.service.findPage(page, linesPerPage, orderBy, direction);
+
+        if(pageUsers.getTotalElements() == 0){
+            return ResponseEntity.noContent().build();
+        }
+        Page<UserAccountDto> guests = pageUsers
+                .map(u -> new UserAccountDto(u.getName(), u.getEmail(), null, null));
+        return ResponseEntity.ok(guests);
     }
 }

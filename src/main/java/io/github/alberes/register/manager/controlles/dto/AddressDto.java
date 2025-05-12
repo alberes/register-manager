@@ -12,19 +12,17 @@ public record AddressDto(
         @NotNull(message = "Obligatory field")
         @Min(value = 1, message = "Fill this field greater than 0")
         Integer number,
-        @NotBlank(message = "Obligatory field")
-        @Size(min = 10, max = 100, message = "Fill this field with size between 10 and 100")
         String additionalAddress,
         @NotBlank(message = "Obligatory field")
-        @Size(min = 10, max = 100, message = "Fill this field with size between 10 and 100")
+        @Size(min = 5, max = 100, message = "Fill this field with size between 5 and 100")
         String neighborhood,
         @NotBlank(message = "Obligatory field")
-        @Size(min = 10, max = 100, message = "Fill this field with size between 10 and 100")
+        @Size(min = 5, max = 100, message = "Fill this field with size between 5 and 100")
         String city,
         @NotBlank(message = "Obligatory field")
-        @Size(min = 10, max = 100, message = "Fill this field with size between 10 and 100")
+        @Size(min = 2, max = 2, message = "Fill this field with size between 2 and 2")
         String state,
         @NotBlank(message = "Obligatory field")
-        @Size(min = 8, max = 8, message = "Fill this field with size between 10 and 100")
+        @Size(min = 8, max = 8, message = "Fill this field with size between 8 and 8")
         String zipCode) {
 }
