@@ -35,5 +35,6 @@ public class Application implements CommandLineRunner {
 		if(this.service.notExistsEmail(userAccount.getEmail())){
 			this.service.save(userAccount);
 		}
+
 	}
 }

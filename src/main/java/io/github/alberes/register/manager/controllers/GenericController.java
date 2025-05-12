@@ -1,4 +1,4 @@
-package io.github.alberes.register.manager.controlles;
+package io.github.alberes.register.manager.controllers;
 
 import io.github.alberes.register.manager.domains.UserPrincipal;
 import org.springframework.security.core.GrantedAuthority;

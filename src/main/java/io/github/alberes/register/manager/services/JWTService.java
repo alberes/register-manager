@@ -1,6 +1,6 @@
 package io.github.alberes.register.manager.services;
 
-import io.github.alberes.register.manager.controlles.dto.TokenDto;
+import io.github.alberes.register.manager.controllers.dto.TokenDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Function;
 

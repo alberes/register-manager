@@ -1,8 +1,7 @@
-package io.github.alberes.register.manager.controlles.exceptions;
+package io.github.alberes.register.manager.controllers.exceptions;
 
-import io.github.alberes.register.manager.controlles.exceptions.dto.FieldErroDto;
-import io.github.alberes.register.manager.controlles.exceptions.dto.StandardErrorDto;
-import io.github.alberes.register.manager.services.exceptions.AuthorizationException;
+import io.github.alberes.register.manager.controllers.exceptions.dto.FieldErroDto;
+import io.github.alberes.register.manager.controllers.exceptions.dto.StandardErrorDto;
 import io.github.alberes.register.manager.services.exceptions.DuplicateRecordException;
 import io.github.alberes.register.manager.services.exceptions.ObjectNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,7 +1,7 @@
-package io.github.alberes.register.manager.controlles;
+package io.github.alberes.register.manager.controllers;
 
-import io.github.alberes.register.manager.controlles.dto.LoginDto;
-import io.github.alberes.register.manager.controlles.dto.TokenDto;
+import io.github.alberes.register.manager.controllers.dto.LoginDto;
+import io.github.alberes.register.manager.controllers.dto.TokenDto;
 import io.github.alberes.register.manager.services.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

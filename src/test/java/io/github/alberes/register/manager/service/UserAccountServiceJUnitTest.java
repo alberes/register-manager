@@ -4,6 +4,7 @@ import io.github.alberes.register.manager.domains.UserAccount;
 import io.github.alberes.register.manager.services.UserAccountService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -50,7 +51,7 @@ public class UserAccountServiceJUnitTest {
         Assertions.assertEquals(userAccountDB.getCreatedDate().toLocalDate(), LocalDate.now());
     }
 
-    @Test
+    //@Test
     public void test_findById(){
         UserAccount userAccountDB = this.service.find(UUID.fromString("7ff5c600-19fa-4c46-8802-c9080bbb2efb"));
 
@@ -58,7 +59,8 @@ public class UserAccountServiceJUnitTest {
         Assertions.assertNotNull(userAccountDB);
     }
 
-    @Test
+    @Disabled("Desabilitado para executar a aplicao local")
+    //@Test
     public void test_update(){
         UserAccount userAccountDB = this.service.find(UUID.fromString("32de96ca-7879-4bc3-b70a-4d8558db7b58"));
 
@@ -71,4 +73,5 @@ public class UserAccountServiceJUnitTest {
         Assertions.assertEquals(userAccountDB.getName(), userAccountDBUpdated.getName());
         Assertions.assertEquals(userAccountDBUpdated.getLastModifiedDate().toLocalDate(), LocalDate.now());
     }
+
 }

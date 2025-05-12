@@ -1,4 +1,4 @@
-package io.github.alberes.register.manager.controlles.exceptions.dto;
+package io.github.alberes.register.manager.controllers.exceptions.dto;
 
 import java.io.Serializable;
 import java.util.List;

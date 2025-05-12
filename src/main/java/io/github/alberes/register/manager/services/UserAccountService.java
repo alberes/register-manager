@@ -38,7 +38,6 @@ public class UserAccountService implements GenericService{
             throw new DuplicateRecordException("Registration with e-mail " + userAccount.getEmail() + " has already been registered!");
         }
         String password = this.encoder.encode(userAccount.getPassword());
-        userAccount.setRoles(new HashSet<String>());
         userAccount.setPassword(password);
         return this.repository.save(userAccount);
     }

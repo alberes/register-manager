@@ -1,7 +1,7 @@
 package io.github.alberes.register.manager.services;
 
-import io.github.alberes.register.manager.controlles.dto.LoginDto;
-import io.github.alberes.register.manager.controlles.dto.TokenDto;
+import io.github.alberes.register.manager.controllers.dto.LoginDto;
+import io.github.alberes.register.manager.controllers.dto.TokenDto;
 import io.github.alberes.register.manager.services.exceptions.AuthorizationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;

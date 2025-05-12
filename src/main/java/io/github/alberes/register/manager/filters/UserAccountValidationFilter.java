@@ -2,7 +2,7 @@ package io.github.alberes.register.manager.filters;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import io.github.alberes.register.manager.controlles.exceptions.dto.StandardErrorDto;
+import io.github.alberes.register.manager.controllers.exceptions.dto.StandardErrorDto;
 import io.github.alberes.register.manager.domains.UserPrincipal;
 import io.github.alberes.register.manager.utils.JsonUtils;
 import jakarta.servlet.FilterChain;

@@ -1,7 +1,7 @@
-package io.github.alberes.register.manager.controlles.mappers;
+package io.github.alberes.register.manager.controllers.mappers;
 
-import io.github.alberes.register.manager.controlles.dto.AddressDto;
-import io.github.alberes.register.manager.controlles.dto.AddressViaCEPDto;
+import io.github.alberes.register.manager.controllers.dto.AddressDto;
+import io.github.alberes.register.manager.controllers.dto.AddressViaCEPDto;
 import io.github.alberes.register.manager.domains.Address;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

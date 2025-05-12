@@ -1,8 +1,8 @@
-package io.github.alberes.register.manager.controlles;
+package io.github.alberes.register.manager.controllers;
 
-import io.github.alberes.register.manager.controlles.dto.UserAccountDto;
-import io.github.alberes.register.manager.controlles.dto.UserAccountUpdateDto;
-import io.github.alberes.register.manager.controlles.mappers.UserAccountMapper;
+import io.github.alberes.register.manager.controllers.dto.UserAccountDto;
+import io.github.alberes.register.manager.controllers.dto.UserAccountUpdateDto;
+import io.github.alberes.register.manager.controllers.mappers.UserAccountMapper;
 import io.github.alberes.register.manager.domains.UserAccount;
 import io.github.alberes.register.manager.services.UserAccountService;
 import jakarta.validation.Valid;

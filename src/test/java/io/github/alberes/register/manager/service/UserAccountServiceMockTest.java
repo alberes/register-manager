@@ -113,4 +113,5 @@ public class UserAccountServiceMockTest {
         Assertions.assertEquals(this.messageObjectNotFoundException,
                 objectNotFoundException.getMessage());
     }
+
 }

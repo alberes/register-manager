@@ -1,6 +1,6 @@
-package io.github.alberes.register.manager.controlles.mappers;
+package io.github.alberes.register.manager.controllers.mappers;
 
-import io.github.alberes.register.manager.controlles.dto.UserAccountDto;
+import io.github.alberes.register.manager.controllers.dto.UserAccountDto;
 import io.github.alberes.register.manager.domains.UserAccount;
 import org.mapstruct.Mapper;
 
