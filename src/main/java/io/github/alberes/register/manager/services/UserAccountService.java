@@ -39,7 +39,6 @@ public class UserAccountService implements GenericService{
         }
         String password = this.encoder.encode(userAccount.getPassword());
         userAccount.setRoles(new HashSet<String>());
-        userAccount.getRoles().add("USER");
         userAccount.setPassword(password);
         return this.repository.save(userAccount);
     }
