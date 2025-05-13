@@ -50,7 +50,7 @@ public class UserAccount implements Serializable {
     @CollectionTable(name = "user_account_role")
     private Set<String> roles;
 
-    @OneToMany(mappedBy = "userAccount")
+    @OneToMany(mappedBy = "userAccount", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Address> addresses;
 
 }

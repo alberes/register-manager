@@ -7,7 +7,7 @@ spring:
     ansi:
       enabled: ALWAYS
   datasource:
-    url: jdbc:postgresql://postgresdb:5432/register_manager
+    url: jdbc:postgresql://localhost:5432/register_manager
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver

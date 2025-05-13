@@ -1,6 +1,7 @@
 package io.github.alberes.register.manager.controllers;
 
 import io.github.alberes.register.manager.controllers.dto.UserAccountDto;
+import io.github.alberes.register.manager.controllers.dto.UserAccountReportDto;
 import io.github.alberes.register.manager.controllers.dto.UserAccountUpdateDto;
 import io.github.alberes.register.manager.controllers.mappers.UserAccountMapper;
 import io.github.alberes.register.manager.domains.UserAccount;
@@ -38,11 +39,11 @@ public class UserAccountController implements GenericController{
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
-    public ResponseEntity<UserAccountDto> find(@PathVariable String id){
+    public ResponseEntity<UserAccountReportDto> find(@PathVariable String id){
         UUID userId = UUID.fromString(id);
         UserAccount userAccount = this.service.find(userId);
         userAccount.setPassword(null);
-        UserAccountDto dto = this.mapper.toDto(userAccount);
+        UserAccountReportDto dto = this.mapper.toDto(userAccount);
         return ResponseEntity.ok(dto);
     }
 
@@ -67,7 +68,7 @@ public class UserAccountController implements GenericController{
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
-    public ResponseEntity<Page<UserAccountDto>> page(
+    public ResponseEntity<Page<UserAccountReportDto>> page(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
             @RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
@@ -78,8 +79,9 @@ public class UserAccountController implements GenericController{
         if(pageUsers.getTotalElements() == 0){
             return ResponseEntity.noContent().build();
         }
-        Page<UserAccountDto> guests = pageUsers
-                .map(u -> new UserAccountDto(u.getName(), u.getEmail(), null, null));
-        return ResponseEntity.ok(guests);
+        Page<UserAccountReportDto> pageReport = pageUsers
+                .map(u -> new UserAccountReportDto(
+                        u.getId().toString(), u.getName(), u.getEmail(), u.getLastModifiedDate(), u.getCreatedDate()));
+        return ResponseEntity.ok(pageReport);
     }
 }

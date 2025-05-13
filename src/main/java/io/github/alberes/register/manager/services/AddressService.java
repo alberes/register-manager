@@ -24,9 +24,13 @@ public class AddressService implements GenericService{
 
     private final AddressRepository repository;
 
+    private final UserAccountService userAccountService;
+
     @Transactional
     @Modifying
     public Address save(Address address){
+        UserAccount userAccount = this.userAccountService.find(address.getUserAccount().getId());
+        address.setUserAccount(userAccount);
         address = this.repository.save(address);
         return address;
     }
@@ -56,15 +60,8 @@ public class AddressService implements GenericService{
     }
 
     @Transactional
-    public Page<Address> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
-        if(this.hasRoleAdmin(userPrincipal.getAuthorities())) {
-            return this.repository.findAll(
-                    PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy));
-        } else{
-            return this.repository.findByUserAccountId(userPrincipal.getId(), PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy));
-        }
+    public Page<Address> findPage(UUID userId, Integer page, Integer linesPerPage, String orderBy, String direction) {
+        return this.repository.findByUserAccountId(userId, PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy));
     }
 
 }

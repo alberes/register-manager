@@ -1,6 +1,7 @@
 package io.github.alberes.register.manager.controllers;
 
 import io.github.alberes.register.manager.controllers.dto.AddressDto;
+import io.github.alberes.register.manager.controllers.dto.AddressReportDto;
 import io.github.alberes.register.manager.controllers.dto.AddressViaCEPDto;
 import io.github.alberes.register.manager.controllers.mappers.AddressMapper;
 import io.github.alberes.register.manager.domains.Address;
@@ -40,10 +41,10 @@ public class AddressController implements GenericController{
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
-    public ResponseEntity<AddressDto> find(@PathVariable String userId, @PathVariable String id){
+    public ResponseEntity<AddressReportDto> find(@PathVariable String userId, @PathVariable String id){
         UUID addressId = UUID.fromString(id);
         Address address = this.service.find(addressId);
-        AddressDto dto = this.mapper.toDto(address);
+        AddressReportDto dto = this.mapper.toDto(address);
         return ResponseEntity.ok(dto);
     }
 
@@ -75,20 +76,21 @@ public class AddressController implements GenericController{
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
-    public ResponseEntity<Page<AddressDto>> page(
+    public ResponseEntity<Page<AddressReportDto>> page(
+            @PathVariable String userId,
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
             @RequestParam(value = "orderBy", defaultValue = "publicArea") String orderBy,
             @RequestParam(value = "direction", defaultValue = "ASC") String direction
     ){
-        Page<Address> pageAddress = this.service.findPage(page, linesPerPage, orderBy, direction);
+        Page<Address> pageAddress = this.service.findPage(UUID.fromString(userId), page, linesPerPage, orderBy, direction);
 
         if(pageAddress.getTotalElements() == 0){
             return ResponseEntity.noContent().build();
         }
-        Page<AddressDto> guests = pageAddress
+        Page<AddressReportDto> pageReport = pageAddress
                 .map(this.mapper::toDto);
-        return ResponseEntity.ok(guests);
+        return ResponseEntity.ok(pageReport);
     }
 
 }

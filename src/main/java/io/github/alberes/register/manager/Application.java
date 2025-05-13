@@ -34,6 +34,16 @@ public class Application implements CommandLineRunner {
 		userAccount.getRoles().add("ADMIN");
 		if(this.service.notExistsEmail(userAccount.getEmail())){
 			this.service.save(userAccount);
+
+			for(int i = 1; i <= 120; i++){
+				userAccount = new UserAccount();
+				userAccount.setName("User " + i + " register");
+				userAccount.setEmail("user" + i + "@user" + i + ".com");
+				userAccount.setPassword("user123456_" + i);
+				userAccount.setRoles(new HashSet<String>());
+				userAccount.getRoles().add("USER");
+				this.service.save(userAccount);
+			}
 		}
 
 	}
