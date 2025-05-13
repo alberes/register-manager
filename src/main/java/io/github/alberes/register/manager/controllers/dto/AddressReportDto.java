@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDateTime;
+
 public record AddressReportDto(
         String id,
         String publicArea,
@@ -13,5 +15,6 @@ public record AddressReportDto(
         String neighborhood,
         String city,
         String state,
-        String zipCode) {
+        String zipCode,
+        LocalDateTime createdDate) {
 }

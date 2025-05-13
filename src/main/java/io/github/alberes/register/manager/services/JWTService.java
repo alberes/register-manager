@@ -30,11 +30,11 @@ public class JWTService {
 
     }
 
-    public TokenDto generateToken(String username) {
+    public TokenDto generateToken(String id, String username) {
         Map<String, Object> claims = new HashMap<String, Object>();
         Date startDate = new Date(System.currentTimeMillis());
         Date expirationDate = new Date(startDate.getTime() * 60 * 60 * 30);
-        return new TokenDto(Jwts.builder()
+        return new TokenDto(id, Jwts.builder()
                 .claims()
                 .add(claims)
                 .subject(username)

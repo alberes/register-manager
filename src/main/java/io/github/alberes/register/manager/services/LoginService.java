@@ -2,6 +2,7 @@ package io.github.alberes.register.manager.services;
 
 import io.github.alberes.register.manager.controllers.dto.LoginDto;
 import io.github.alberes.register.manager.controllers.dto.TokenDto;
+import io.github.alberes.register.manager.domains.UserPrincipal;
 import io.github.alberes.register.manager.services.exceptions.AuthorizationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -22,7 +23,8 @@ public class LoginService {
         Authentication authentication =
                 this.provider.authenticate(new UsernamePasswordAuthenticationToken(dto.username(), dto.password()));
         if(authentication.isAuthenticated()){
-            return this.service.generateToken(dto.username());
+            UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
+            return this.service.generateToken(userPrincipal.getId().toString(), dto.username());
         }else{
             throw new AuthorizationException("Authotization failure!");
         }

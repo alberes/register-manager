@@ -15,6 +15,6 @@ public record UserAccountDto(
         @Size(min = 8, max = 20, message = "Fill this field with size between 8 and 20")
         String password,
         @NotBlank(message = "Obligatory field")
-        @Size(min = 4, max = 20, message = "Fill this field with size between 8 and 20")
+        @Size(min = 4, max = 20, message = "Fill this field with size between 4 and 20")
         String role) {
 }

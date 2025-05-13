@@ -60,14 +60,14 @@ public class UserAccountService implements GenericService{
     }
 
     @Transactional
-    public Page<UserAccount> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+    public Page<UserAccount> findPage(UUID id, Integer page, Integer linesPerPage, String orderBy, String direction) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
         if(this.hasRoleAdmin(userPrincipal.getAuthorities())) {
             return this.repository.findAll(
                     PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy));
         }else{
-            return this.repository.findById(userPrincipal.getId(), PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy));
+            return this.repository.findById(id, PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy));
         }
     }
 

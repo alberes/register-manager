@@ -66,15 +66,16 @@ public class UserAccountController implements GenericController{
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+    @GetMapping("/{id}/all")
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     public ResponseEntity<Page<UserAccountReportDto>> page(
+            @PathVariable String id,
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
             @RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
             @RequestParam(value = "direction", defaultValue = "ASC") String direction
     ){
-        Page<UserAccount> pageUsers = this.service.findPage(page, linesPerPage, orderBy, direction);
+        Page<UserAccount> pageUsers = this.service.findPage(UUID.fromString(id), page, linesPerPage, orderBy, direction);
 
         if(pageUsers.getTotalElements() == 0){
             return ResponseEntity.noContent().build();

@@ -1,6 +1,8 @@
 package io.github.alberes.register.manager;
 
+import io.github.alberes.register.manager.domains.Address;
 import io.github.alberes.register.manager.domains.UserAccount;
+import io.github.alberes.register.manager.services.AddressService;
 import io.github.alberes.register.manager.services.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,6 +20,9 @@ public class Application implements CommandLineRunner {
 
 	@Autowired
 	private UserAccountService service;
+
+	@Autowired
+	private AddressService addressService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -43,6 +48,19 @@ public class Application implements CommandLineRunner {
 				userAccount.setRoles(new HashSet<String>());
 				userAccount.getRoles().add("USER");
 				this.service.save(userAccount);
+
+				for(int j = 1; j <= 50; j++) {
+					Address address = new Address();
+					address.setUserAccount(userAccount);
+					address.setPublicArea("Avenida principal " + userAccount.getId());
+					address.setNumber(j);
+					address.setAdditionalAddress("Additional address " + userAccount.getId());
+					address.setNeighborhood("Neighborhood " + userAccount.getId());
+					address.setCity("City");
+					address.setState("ST");
+					address.setZipCode("00000000");
+					this.addressService.save(address);
+				}
 			}
 		}
 
