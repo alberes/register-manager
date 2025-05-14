@@ -1,0 +1,3 @@
+io\github\alberes\register\manager\RegisterManagerApplicationTests.class
+io\github\alberes\register\manager\service\UserAccountServiceJUnitTest.class
+io\github\alberes\register\manager\service\UserAccountServiceMockTest.class
