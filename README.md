@@ -23,7 +23,8 @@ Tabelas user_account_role e address.
 * IDE: [Intellij](https://www.jetbrains.com/idea/)
 * Gerenciado de dependencias: [Apache Maven 3.9.9](https://maven.apache.org/)
 * Container: [Docker](https://www.docker.com/) e [Docker Hub](https://hub.docker.com/)
-* Ferramentas: [Postman](https://www.postman.com/)
+* Ferramentas: [Postman](https://www.postman.com/) [Google Chrome
+   Versão 136.0.7103.93 (Versão oficial) 64 bits](https://www.google.com/intl/pt-BR/chrome/)
 
 ### Como Executar
 1. Clone o repositório: git clone https://github.com/alberes/register-manager
@@ -39,7 +40,7 @@ Localizar o arquivo [SUB_DIRETORIOS]/register-manager/DDL.sql
 ```
 docker run --name postgresdb -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES=postgres -e POSTGRES_DB=register_manager -d postgres:16.3
 ```
-3. Executar o projeto
+4. Executar o projeto
 - Abrir o terminal na raiz do projeto [SUB_DIRETORIOS]/register-manager e exeuctar o comando abaixo para gerar o pacote.
 ```
 mvn -DskipTests=true clean package
