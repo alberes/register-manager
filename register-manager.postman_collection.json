@@ -1,0 +1,675 @@
+{
+	"info": {
+		"_postman_id": "fa3340e5-7944-4ca5-8cdc-4a6824e942c1",
+		"name": "register-manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "891104",
+		"_collection_link": "https://solar-station-361672.postman.co/workspace/cursos~ed905280-362f-4384-9722-3985fe33206e/collection/891104-fa3340e5-7944-4ca5-8cdc-4a6824e942c1?action=share&source=collection_link&creator=891104"
+	},
+	"item": [
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "FIND_CEP_VIA_CEP_200",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{REGISTER_MANAGER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/v1/users/ded96ca1-3e64-4962-b1c1-3fbe63e24ba9/addresses/zipcode/06010171",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"ded96ca1-3e64-4962-b1c1-3fbe63e24ba9",
+								"addresses",
+								"zipcode",
+								"06010171"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VIA_CEP_200",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{REGISTER_MANAGER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://viacep.com.br/ws/06010110/json/",
+							"protocol": "https",
+							"host": [
+								"viacep",
+								"com",
+								"br"
+							],
+							"path": [
+								"ws",
+								"06010110",
+								"json",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE_ADDRESS_201",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{REGISTER_MANAGER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"publicArea\": \"Avenida Hilário Pereira de Souza - afaf20fd-5d6c-491b-a4ff-7f2aa3cbc839\",\r\n    \"number\": 15,\r\n    \"additionalAddress\": \"\",\r\n    \"neighborhood\": \"Centro - afaf20fd-5d6c-491b-a4ff-7f2aa3cbc839\",\r\n    \"city\": \"Osasco\",\r\n    \"state\": \"SP\",\r\n    \"zipCode\": \"06010170\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/v1/users/afaf20fd-5d6c-491b-a4ff-7f2aa3cbc839/addresses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"afaf20fd-5d6c-491b-a4ff-7f2aa3cbc839",
+								"addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE_ADDRESS_204",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{REGISTER_MANAGER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"publicArea\": \"Avenida Hilário Pereira de Souza updated\",\r\n    \"number\": 16,\r\n    \"additionalAddress\": \"updated\",\r\n    \"neighborhood\": \"Centro  updated\",\r\n    \"city\": \"Osasco  updated\",\r\n    \"state\": \"SC\",\r\n    \"zipCode\": \"06010171\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/v1/users/c1aba828-3636-4140-92f0-33c218c325d0/addresses/563cc879-05ec-45bf-82ed-4a8ac7e6cf35",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"c1aba828-3636-4140-92f0-33c218c325d0",
+								"addresses",
+								"563cc879-05ec-45bf-82ed-4a8ac7e6cf35"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE_ADDRESS_204",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{REGISTER_MANAGER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/v1/users/c1aba828-3636-4140-92f0-33c218c325d0/addresses/563cc879-05ec-45bf-82ed-4a8ac7e6cf35",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"c1aba828-3636-4140-92f0-33c218c325d0",
+								"addresses",
+								"563cc879-05ec-45bf-82ed-4a8ac7e6cf35"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND_ADDRESS_200",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{REGISTER_MANAGER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/v1/users/c1aba828-3636-4140-92f0-33c218c325d0/addresses/af60ecef-a1b0-4cdc-8f83-05369ce28d8e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"c1aba828-3636-4140-92f0-33c218c325d0",
+								"addresses",
+								"af60ecef-a1b0-4cdc-8f83-05369ce28d8e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND_PAGE_ADDRESSES_200",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{REGISTER_MANAGER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/v1/users/a0004173-37b3-414c-b6f9-5c76c2718f74/addresses?page=0&linesPerPage=10&orderBy=publicArea&direction=ASC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"a0004173-37b3-414c-b6f9-5c76c2718f74",
+								"addresses"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "linesPerPage",
+									"value": "10"
+								},
+								{
+									"key": "orderBy",
+									"value": "publicArea"
+								},
+								{
+									"key": "direction",
+									"value": "ASC"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "LOGIN_USER_200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const body = JSON.parse(responseBody);\r",
+									"\r",
+									"pm.globals.set(\"REGISTER_MANAGER_TOKEN\", body.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"postman@postman.com\",\r\n    \"password\": \"postman123456\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN_ADMIN_200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const body = JSON.parse(responseBody);\r",
+									"\r",
+									"pm.globals.set(\"REGISTER_MANAGER_TOKEN\", body.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin@admin.com\",\r\n    \"password\": \"admin123456\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN_MANAGER_200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const body = JSON.parse(responseBody);\r",
+									"\r",
+									"pm.globals.set(\"REGISTER_MANAGER_TOKEN\", body.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"manager@manager.com\",\r\n    \"password\": \"manager123456\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "CREATE_USER_201",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{REGISTER_MANAGER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"UPosteman User\",\r\n    \"email\": \"postman@postman.com\",\r\n    \"password\": \"postman123456\",\r\n    \"role\": \"USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND_USER_200",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{REGISTER_MANAGER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/v1/users/832a6107-9f3b-442c-9245-509f65222a7c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"832a6107-9f3b-442c-9245-509f65222a7c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE_USER_204",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{REGISTER_MANAGER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"user 1 register updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/v1/users/6c96d5e1-154a-47b4-be80-f5fa52dff7c8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"6c96d5e1-154a-47b4-be80-f5fa52dff7c8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE_USER_204",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{REGISTER_MANAGER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/v1/users/2f1b0851-f200-4056-9e64-83fd48155a94",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"2f1b0851-f200-4056-9e64-83fd48155a94"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE_USER_ADMIN_201",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{REGISTER_MANAGER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Admin 2 Manager\",\r\n    \"email\": \"admin2@admin2.com\",\r\n    \"password\": \"admin2123456\",\r\n    \"role\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND_USER_PAGE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{REGISTER_MANAGER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/v1/users/09bf350f-b290-4bb7-8154-7900612b0e32/all?page=0&linesPerPage=24&orderBy=name&direction=ASC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"09bf350f-b290-4bb7-8154-7900612b0e32",
+								"all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "linesPerPage",
+									"value": "24"
+								},
+								{
+									"key": "orderBy",
+									"value": "name"
+								},
+								{
+									"key": "direction",
+									"value": "ASC"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

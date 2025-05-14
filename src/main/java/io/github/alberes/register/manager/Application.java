@@ -40,6 +40,22 @@ public class Application implements CommandLineRunner {
 		if(this.service.notExistsEmail(userAccount.getEmail())){
 			this.service.save(userAccount);
 
+			userAccount = new UserAccount();
+			userAccount.setName("Manager Data");
+			userAccount.setEmail("manager@manager.com");
+			userAccount.setPassword("manager123456");
+			userAccount.setRoles(new HashSet<String>());
+			userAccount.getRoles().add("MANAGER");
+			this.service.save(userAccount);
+
+			userAccount = new UserAccount();
+			userAccount.setName("User Data");
+			userAccount.setEmail("user@user.com");
+			userAccount.setPassword("user123456");
+			userAccount.setRoles(new HashSet<String>());
+			userAccount.getRoles().add("USER");
+			this.service.save(userAccount);
+
 			for(int i = 1; i <= 120; i++){
 				userAccount = new UserAccount();
 				userAccount.setName("User " + i + " register");
@@ -49,7 +65,7 @@ public class Application implements CommandLineRunner {
 				userAccount.getRoles().add("USER");
 				this.service.save(userAccount);
 
-				for(int j = 1; j <= 50; j++) {
+				for(int j = 1; j <= 120; j++) {
 					Address address = new Address();
 					address.setUserAccount(userAccount);
 					address.setPublicArea("Avenida principal " + userAccount.getId());

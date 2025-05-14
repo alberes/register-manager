@@ -8,7 +8,7 @@ docker run --name postgresdb -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTG
 
 docker run --name register-manager --network register-manager-network -p 8081:8081 -d alberes/register-manager:1.0.0
 
-Hibernate: 
+
 create table address (
 	id uuid not null,
 	additional_address varchar(100),
@@ -23,7 +23,7 @@ create table address (
 	user_id uuid not null,
 	primary key (id)
 )
-Hibernate: 
+
 create table user_account (
 	id uuid not null,
 	created_date timestamp(6) not null,
@@ -33,24 +33,24 @@ create table user_account (
 	password varchar(200) not null,
 	primary key (id)
 )
-Hibernate: 
+
 create table user_account_role (
 	user_account_id uuid not null,
 	roles varchar(255)
 )
-Hibernate: 
+
 alter table if exists user_account 
-   drop constraint if exists UKhl02wv5hym99ys465woijmfib
-Hibernate: 
+   drop constraint if exists unique_user_account_email
+
 alter table if exists user_account 
-   add constraint UKhl02wv5hym99ys465woijmfib unique (email)
-Hibernate: 
+   add constraint unique_user_account_email unique (email)
+
 alter table if exists address 
-   add constraint FK7aekkir5nb594est3cq9k7f2e 
+   add constraint fk_user_id_address 
    foreign key (user_id) 
    references user_account
-Hibernate: 
+
 alter table if exists user_account_role 
-   add constraint FKsfh6ebm1waiplr0998y3w7e3m 
+   add constraint fk_user_id_role 
    foreign key (user_account_id) 
    references user_account
