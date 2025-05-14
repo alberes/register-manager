@@ -5,12 +5,15 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.function.Function;
 
@@ -18,6 +21,9 @@ import java.util.function.Function;
 public class JWTService {
 
     private String secretKey;
+
+    @Value("${app.session.expirationtime}")
+    private int sessionExpiration;
 
     public JWTService(){
         try {
@@ -33,16 +39,17 @@ public class JWTService {
     public TokenDto generateToken(String id, String username) {
         Map<String, Object> claims = new HashMap<String, Object>();
         Date startDate = new Date(System.currentTimeMillis());
-        Date expirationDate = new Date(startDate.getTime() * 60 * 60 * 30);
+        LocalDateTime expirationDate = LocalDateTime.now().plusMinutes(this.sessionExpiration);
+        Date expiration = Date.from(expirationDate.atZone(ZoneId.systemDefault()).toInstant());
         return new TokenDto(id, Jwts.builder()
                 .claims()
                 .add(claims)
                 .subject(username)
                 .issuedAt(startDate)
-                .expiration(expirationDate)
+                .expiration(expiration)
                 .and()
                 .signWith(getKey())
-                .compact(), expirationDate.getTime());
+                .compact(), expiration.getTime());
     }
 
     private SecretKey getKey() {

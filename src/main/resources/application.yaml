@@ -22,7 +22,9 @@ spring:
     enabled: false
 server:
   port: 8081
-
+app:
+  session:
+    expirationtime: 2
 
 
 viacep:
