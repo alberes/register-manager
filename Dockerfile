@@ -14,4 +14,10 @@ COPY --from=build ./build/target/*.jar ./register-manager.jar
 
 expose 8081
 
+ENV DATASOURCE_URL=''
+ENV DATASOURCE_USER=''
+ENV DATASOURCE_PASSWORD=''
+ENV VIA_CEP_URL='https://viacep.com.br/ws/'
+ENV EXPIRATION_TIME=30
+
 ENTRYPOINT java -jar register-manager.jar

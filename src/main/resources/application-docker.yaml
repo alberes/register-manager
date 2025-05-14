@@ -7,9 +7,9 @@ spring:
     ansi:
       enabled: ALWAYS
   datasource:
-    url: jdbc:postgresql://localhost:5432/register_manager
-    username: postgres
-    password: postgres
+    url: ${DATASOURCE_URL:jdbc:postgresql://postgresdb:5432/register_manager}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
@@ -24,8 +24,8 @@ server:
   port: 8081
 app:
   session:
-    expirationtime: 30
+    expirationtime: ${EXPIRATION_TIME:30}
 
 
 viacep:
-  url:  https://viacep.com.br/ws/
+  url:  ${VIA_CEP_URL:https://viacep.com.br/ws/}

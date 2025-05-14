@@ -1,12 +1,16 @@
 docker build --tag alberes/register-manager:1.0.0 .
 
+docker build --tag alberes/register-manager-frontend:1.0.0 .
+
 docker network create register-manager-network
 
 docker run --name postgresdb -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES=postgres -e POSTGRES_DB=register_manager -d postgres:16.3
 
 docker run --name postgresdb -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES=postgres -e POSTGRES_DB=register_manager --network register-manager-network -d postgres:16.3
 
-docker run --name register-manager --network register-manager-network -p 8081:8081 -d alberes/register-manager:1.0.0
+docker run --name register-manager -p 8081:8081 --network register-manager-network -e DATASOURCE_URL=jdbc:postgresql://postgresdb:5432/register_manager -e DATASOURCE_USER=postgres -e DATASOURCE_PASSWORD=postgres -e VIA_CEP_URL=https://viacep.com.br/ws/ -e EXPIRATION_TIME=30 -d alberes/register-manager:1.0.0
+
+docker run --name register-manager-frontend -p 8080:8080 --network register-manager-network -e REGISTER_MANAGER_URL=http://localhost:8081/api/v1 -e EXPIRATION_TIME=30 -d alberes/register-manager:1.0.0
 
 
 create table address (

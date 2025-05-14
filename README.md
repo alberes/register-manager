@@ -16,12 +16,14 @@ Tabelas user_account_role e address.
 
 ### Tecnologias Utilizadas
 * Linguagem: Java e SQL
-* Banco de Dados: Postgres
-* Frameworks: Spring Boot 3.4.5
+* Banco de Dados: [Postgres](https://www.postgresql.org/)
+* Frameworks: [Spring Boot 3.4.5](https://start.spring.io/)
 * Dependencias: Spring Security, jjwt, JPA, lombok, mapstruct, jackson, openfeign
 * JDK: 17
-* Gerenciado de dependencias: Apache Maven 3.9.9
-* Ferramentas: Postman
+* IDE: [Intellij](https://www.jetbrains.com/idea/)
+* Gerenciado de dependencias: [Apache Maven 3.9.9](https://maven.apache.org/)
+* Container: [Docker](https://www.docker.com/) e [Docker Hub](https://hub.docker.com/)
+* Ferramentas: [Postman](https://www.postman.com/)
 
 ### Como Executar
 1. Clone o repositório: git clone https://github.com/alberes/register-manager
@@ -31,6 +33,7 @@ Tabelas user_account_role e address.
 Certifique-se de que o banco de dados está configurado corretamente.
 A aplicação irá criar as tabelas automaticamento caso não exista ou execute o script antes que se encontra no projeto.
 Localizar o arquivo [SUB_DIRETORIOS]/register-manager/DDL.sql
+3. Usando uma imagem Docker (Opcional)
 
  Um opção é criar um container docker com a imagem do Postgres, abaixo um exemplo que configurar usuário, senha e cria o banco de dados.
 ```
@@ -63,7 +66,7 @@ A aplicação subirá na porta 8081
       - 
 3. Exemplos:
    - Recuros
-     - [Login](Login) - /api/v1/login
+     - [Login](#Login) - /api/v1/login
      - Users - /api/v1/users
        - [Criar](Users Criar)
        - [Consultar](Users Consultar )
@@ -76,6 +79,7 @@ A aplicação subirá na porta 8081
         - [Excluir](Addresses Excluir)
 
 ## Postman
+    <a id="login_id"></a>
    - Login
 ```
 curl --location 'http://localhost:8081/api/v1/login' \
@@ -170,4 +174,15 @@ curl --location --request PUT 'http://localhost:8081/api/v1/users/(userId)/addre
 ```
 curl --location --request DELETE 'http://localhost:8081/api/v1/users/(userId)/addresses/(addressId)' \
 --header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'
+```
+
+## Docker
+No projeto já existe uma imagem versionada no Docker Hub e precisa apenas ter o ambiente Docker.
+Abrir um terminal no mesmo diretório do arquivo docker-compose.yaml e execute o comando abaixo.
+```
+docker-compose up -d
+```
+Baixar o ambiente
+```
+docker-compose down
 ```
