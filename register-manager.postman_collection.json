@@ -983,6 +983,31 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "AUTHENTICATED_USER",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/v1/users/authenticated",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"authenticated"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
