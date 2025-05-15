@@ -1,3 +1,4 @@
+
 # Projeto: Gerenciamento de Usuários
 Este projeto é responsável por gerenciar usuários, incluindo a criação, edição, exclusão e validação de dados, como a restrição de unicidade no campo de email.
 
@@ -68,37 +69,32 @@ A aplicação subirá na porta 8081
       - 
 3. Exemplos:
    - Recursos
-     - [Login](login) - /api/v1/login
+     - [Login](#login) - /api/v1/login
      - Users - /api/v1/users
-       - [Criar](Users Criar)
-       - [Consultar](Users Consultar )
-	   - [Usuário logado](Consultar usuário logado)
-       - [Atualizar](Users Atualizar)
-       - [Excluir](Users Excluir)
+       - [Criar](#userscriar)
+       - [Consultar](#usersconsultar )
+	   - [Usuário logado](#consultarusuariologado)
+       - [Atualizar](#usersatualizar)
+       - [Excluir](#usersexcluir)
      - Addresses - /api/v1/users/(userId)/addresses
-        - [Criar](Addresses Criar)
-        - [Consultar](Addresses Consultar )
-        - [Atualizar](Addresses Atualizar)
-        - [Excluir](Addresses Excluir)
+        - [Criar](#addressescriar)
+        - [Consultar](#addressesconsultar )
+        - [Consultar Via CEP](#addressesconsultarcep)
+        - [Atualizar](#addressesatualizar)
+        - [Excluir](#addressesexcluir)
 
-## Postman
-	<a id="login"></a>
-	
+## Postman	
+<a id="login"></a>
    - Login
-   
-   
-   
-```
-curl --location 'http://localhost:8081/api/v1/login' \
+	   - `curl --location 'http://localhost:8081/api/v1/login' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "username": "user@user.com",
     "password": "password"
-}'
-```
-   - Users - Criar
-```
-curl --location 'http://localhost:8081/api/v1/users' \
+}'`
+<a id="userscriar"></a>
+- Users - Criar
+	- curl --location 'http://localhost:8081/api/v1/users' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]' \
 --data-raw '{
@@ -107,38 +103,33 @@ curl --location 'http://localhost:8081/api/v1/users' \
     "password": "postman123456",
     "role": "USER"
 }'
-```
-   - Users - Consultar
-```
-curl --location 'http://localhost:8081/api/v1/users/(ID)' \
---header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'
-```
-  - Consultar os dados do usuário logado
-```
-curl --location 'http://localhost:8081/api/v1/users/authenticated'
-```
-   - Users - Consultar usuários com paginação
-```
-curl --location 'http://localhost:8081/api/v1/users/(ID)/addresses?page=0&linesPerPage=10&orderBy=publicArea&direction=ASC' \
---header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'
-```
-   - Users - Atualizar
-```
-curl --location --request PUT 'http://localhost:8081/api/v1/users/(ID)' \
+<a id="usersconsultar"></a>
+	- Users - Consultar
+		- `curl --location 'http://localhost:8081/api/v1/users/(ID)' \
+--header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'`
+<a id="consultarusuariologado"></a>
+	- Consultar os dados do usuário logado
+		- `curl --location 'http://localhost:8081/api/v1/users/authenticated' \
+--header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'`
+<a id="userscriar"></a>
+	- Users - Consultar usuários com paginação
+		- `curl --location 'http://localhost:8081/api/v1/users/(ID)/addresses?page=0&linesPerPage=10&orderBy=publicArea&direction=ASC' \
+--header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'`
+<a id="usersatualizar"></a>
+	- Users - Atualizar
+		- `curl --location --request PUT 'http://localhost:8081/api/v1/users/(ID)' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]' \
 --data '{
     "name": "Name updated"
-}'
-```
-   - Users - Excluir
-```
-curl --location --request DELETE 'http://localhost:8081/api/v1/users/(ID)' \
---header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'
-```
-   - Addresses - Criar
-```
-curl --location 'http://localhost:8081/api/v1/users/(UserId))/addresses' \
+}'`
+<a id="usersexcluir"></a>
+	- Users - Excluir
+		- `curl --location --request DELETE 'http://localhost:8081/api/v1/users/(ID)' \
+--header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'`
+<a id="addressescriar"></a>
+	- Addresses - Criar
+		- `curl --location 'http://localhost:8081/api/v1/users/(UserId))/addresses' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: [TOKEN_OBTIDO_LOGIN]'\
 --data '{
@@ -149,26 +140,22 @@ curl --location 'http://localhost:8081/api/v1/users/(UserId))/addresses' \
     "city": "São Paulo",
     "state": "SP",
     "zipCode": "06185987"
-}'
-```
-   - Addresses - Consultar endereço do usuário
-```
-curl --location 'http://localhost:8081/api/v1/users/(userId)/addresses/(addressId)' \
---header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'
-```
-- Addresses - Consultar endereço VIA CEP para preencher o endereço do usuário
-```
-curl --location 'http://localhost:8081/api/v1/users/(userId)/addresses/zipcode/(CEP)' \
---header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'
-```
-   - Addresses - Consultar usuários com paginação
-```
-curl --location 'http://localhost:8081/api/v1/users/(userId)/addresses?page=0&linesPerPage=10&orderBy=publicArea&direction=ASC' \
---header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'
-```
-   - Addresses - Atualizar
-```
-curl --location --request PUT 'http://localhost:8081/api/v1/users/(userId)/addresses/(addressId)' \
+}'`
+<a id="addressesconsultar"></a>
+	- Addresses - Consultar endereço do usuário
+		- `curl --location 'http://localhost:8081/api/v1/users/(userId)/addresses/(addressId)' \
+--header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'`
+<a id="addressesconsultarcep"></a>
+	- Addresses - Consultar endereço VIA CEP para preencher o endereço do usuário
+		- `curl --location 'http://localhost:8081/api/v1/users/(userId)/addresses/zipcode/(CEP)' \
+--header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'`
+<a id="userscriar"></a>
+	- Addresses - Consultar usuários com paginação
+		- `curl --location 'http://localhost:8081/api/v1/users/(userId)/addresses?page=0&linesPerPage=10&orderBy=publicArea&direction=ASC' \
+--header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'`
+<a id="addressesatualizar"></a>
+	- Addresses - Atualizar
+		- `curl --location --request PUT 'http://localhost:8081/api/v1/users/(userId)/addresses/(addressId)' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]' \
 --data '{
@@ -179,21 +166,28 @@ curl --location --request PUT 'http://localhost:8081/api/v1/users/(userId)/addre
     "city": "Osasco  updated",
     "state": "SC",
     "zipCode": "89625741"
-}'
-```
-   - Addresses - Excluir
-```
-curl --location --request DELETE 'http://localhost:8081/api/v1/users/(userId)/addresses/(addressId)' \
---header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'
-```
+}'`
+<a id="addressesexcluir"></a>
+	- Addresses - Excluir
+		- `curl --location --request DELETE 'http://localhost:8081/api/v1/users/(userId)/addresses/(addressId)' \
+--header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'`
 
 ## Docker
 No projeto já existe uma imagem versionada no Docker Hub e precisa apenas ter o ambiente Docker.
 Abrir um terminal no mesmo diretório do arquivo docker-compose.yaml e execute o comando abaixo.
+- Subir o ambiente:
+	- `docker-compose up -d`
+- Baixar o ambiente
+	- `docker-compose down`
+
+## Comunicação com banco de dados Postgres
+Comunicação usando banco de dados local, remoto ou apenas uma imagem docker
+```mermaid
+graph LR
+A[Postman] -- localhost:8081 --> B((Registe Manager))  -- HOST_DATABASE:5432--> C[PostgresDB]
 ```
-docker-compose up -d
-```
-Baixar o ambiente
-```
-docker-compose down
+Comunicação entre ambientes virtuais usando Docker
+```mermaid
+graph LR
+A[Postman] -- localhost:8081 --> B((Registe Manager))  -- postgresdb:5432--> C[PostgresDB]
 ```
