@@ -35,6 +35,7 @@ Certifique-se de que o banco de dados está configurado corretamente.
 A aplicação irá criar as tabelas automaticamento caso não exista ou execute o script antes que se encontra no projeto.
 Localizar o arquivo [SUB_DIRETORIOS]/register-manager/DDL.sql
 3. Usando uma imagem Docker (Opcional)
+4. Tempo de sessão está configurado para 30 minutos
 
  Um opção é criar um container docker com a imagem do Postgres, abaixo um exemplo que configurar usuário, senha e cria o banco de dados.
 ```
@@ -106,6 +107,10 @@ curl --location 'http://localhost:8081/api/v1/users' \
 ```
 curl --location 'http://localhost:8081/api/v1/users/(ID)' \
 --header 'Authorization: Bearer [TOKEN_OBTIDO_LOGIN]'
+```
+  - Consultar os dados do usuário logado
+```
+curl --location 'http://localhost:8081/api/v1/users/authenticated'
 ```
    - Users - Consultar usuários com paginação
 ```
