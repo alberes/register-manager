@@ -62,16 +62,17 @@ A aplicação subirá na porta 8081
     - Localize a collection que se encontra no diretório [SUB_DIRETORIOS]/register-manager/register-manager.postman_collection
     - Importar no Postman
     - A aplicação criou alguns usuários:
-      - admin@admin.com com
+      - admin@admin.com.com
       - manager@manager.com
       - user@user.com
       - 
 3. Exemplos:
-   - Recuros
-     - [Login](#Login) - /api/v1/login
+   - Recursos
+     - [Login](#login) - /api/v1/login
      - Users - /api/v1/users
        - [Criar](Users Criar)
        - [Consultar](Users Consultar )
+	   - [Usuário logado](Consultar usuário logado)
        - [Atualizar](Users Atualizar)
        - [Excluir](Users Excluir)
      - Addresses - /api/v1/users/(userId)/addresses
@@ -81,7 +82,7 @@ A aplicação subirá na porta 8081
         - [Excluir](Addresses Excluir)
 
 ## Postman
-    <a id="login_id"></a>
+	<a id="login">Login</a>
    - Login
 ```
 curl --location 'http://localhost:8081/api/v1/login' \
