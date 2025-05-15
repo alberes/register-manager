@@ -11,16 +11,6 @@ import java.util.Optional;
 
 public interface GenericController {
 
-    default boolean validate(String id){
-        UserPrincipal userPrincipal = (UserPrincipal)SecurityContextHolder
-                .getContext().getAuthentication().getPrincipal();
-        Optional<? extends GrantedAuthority> roles = userPrincipal.getAuthorities().stream().filter(
-                r -> "ADMIN".equals(r)
-        ).findFirst();
-
-        return !roles.isEmpty() || userPrincipal.getId().equals(id);
-    }
-
     default URI createURI(String path, String id){
         return ServletUriComponentsBuilder
                 .fromCurrentRequestUri()

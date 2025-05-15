@@ -1,5 +1,6 @@
 package io.github.alberes.register.manager.services;
 
+import io.github.alberes.register.manager.constants.MessageConstants;
 import io.github.alberes.register.manager.controllers.dto.LoginDto;
 import io.github.alberes.register.manager.controllers.dto.TokenDto;
 import io.github.alberes.register.manager.domains.UserPrincipal;
@@ -24,9 +25,9 @@ public class LoginService {
                 this.provider.authenticate(new UsernamePasswordAuthenticationToken(dto.username(), dto.password()));
         if(authentication.isAuthenticated()){
             UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
-            return this.service.generateToken(userPrincipal.getId().toString(), dto.username());
+            return this.service.generateToken(userPrincipal);
         }else{
-            throw new AuthorizationException("Authotization failure!");
+            throw new AuthorizationException(MessageConstants.AUTHORIZATION_FAILURE);
         }
     }
 }

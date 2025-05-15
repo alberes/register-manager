@@ -1,5 +1,6 @@
 package io.github.alberes.register.manager.services;
 
+import io.github.alberes.register.manager.constants.MessageConstants;
 import io.github.alberes.register.manager.domains.UserAccount;
 import io.github.alberes.register.manager.domains.UserPrincipal;
 import io.github.alberes.register.manager.repositories.UserAccountRepository;
@@ -21,7 +22,7 @@ public class UserPrincipalDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserAccount userAccount = this.repository.findByEmail(username);
         if(userAccount == null){
-            throw new UsernameNotFoundException("User not found!");
+            throw new UsernameNotFoundException(MessageConstants.OBJECT_NOT_FOUND);
         }
         userAccount.getRoles().size();
         return new UserPrincipal(userAccount);

@@ -24,7 +24,7 @@ Tabelas user_account_role e address.
 * Gerenciado de dependencias: [Apache Maven 3.9.9](https://maven.apache.org/)
 * Container: [Docker](https://www.docker.com/) e [Docker Hub](https://hub.docker.com/)
 * Ferramentas: [Postman](https://www.postman.com/) [Google Chrome
-   Versão 136.0.7103.93 (Versão oficial) 64 bits](https://www.google.com/intl/pt-BR/chrome/)
+   Versão 136.0.7103.93 (Versão oficial) 64 bits](https://www.google.com/intl/pt-BR/chrome/), [PGAdmin](https://www.pgadmin.org/), [Beekeeper](https://www.beekeeperstudio.io/)
 
 ### Como Executar
 1. Clone o repositório: git clone https://github.com/alberes/register-manager

@@ -1,5 +1,6 @@
 package io.github.alberes.register.manager.controllers;
 
+import io.github.alberes.register.manager.constants.MessageConstants;
 import io.github.alberes.register.manager.controllers.dto.AddressDto;
 import io.github.alberes.register.manager.controllers.dto.AddressReportDto;
 import io.github.alberes.register.manager.controllers.dto.AddressViaCEPDto;
@@ -29,7 +30,7 @@ public class AddressController implements GenericController{
     private final AddressMapper mapper;
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    @PreAuthorize(MessageConstants.HAS_ROLE_ADMIN_USER)
     public ResponseEntity<Void> save(@PathVariable String userId, @RequestBody @Valid AddressDto dto){
         Address address = this.mapper.toEntity(dto);
         address.setUserAccount(new UserAccount());
@@ -40,7 +41,7 @@ public class AddressController implements GenericController{
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    @PreAuthorize(MessageConstants.HAS_ROLE_ADMIN_USER)
     public ResponseEntity<AddressReportDto> find(@PathVariable String userId, @PathVariable String id){
         UUID addressId = UUID.fromString(id);
         Address address = this.service.find(addressId);
@@ -49,7 +50,7 @@ public class AddressController implements GenericController{
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    @PreAuthorize(MessageConstants.HAS_ROLE_ADMIN_USER)
     public ResponseEntity<Void> update(@PathVariable String userId, @PathVariable String id, @RequestBody @Valid AddressDto dto){
         Address address = this.mapper.toEntity(dto);
         UUID addressId = UUID.fromString(id);
@@ -59,7 +60,7 @@ public class AddressController implements GenericController{
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    @PreAuthorize(MessageConstants.HAS_ROLE_ADMIN_USER)
     public ResponseEntity<Void> delete(@PathVariable String userId, @PathVariable String id){
         UUID addressId = UUID.fromString(id);
         this.service.delete(addressId);
@@ -67,7 +68,7 @@ public class AddressController implements GenericController{
     }
 
     @GetMapping("/zipcode/{zipcode}")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    @PreAuthorize(MessageConstants.HAS_ROLE_ADMIN_USER)
     public ResponseEntity<AddressDto> getAddress(@PathVariable String userId, @PathVariable String zipcode){
         AddressViaCEPDto dto = this.viaCEPService.getZipCodeViaCEP(zipcode);
         AddressDto addressDto = this.mapper.fromViaDtoToDto(dto);
@@ -75,7 +76,7 @@ public class AddressController implements GenericController{
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    @PreAuthorize(MessageConstants.HAS_ROLE_ADMIN_USER)
     public ResponseEntity<Page<AddressReportDto>> page(
             @PathVariable String userId,
             @RequestParam(value = "page", defaultValue = "0") Integer page,

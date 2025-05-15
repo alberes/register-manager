@@ -1,5 +1,6 @@
 package io.github.alberes.register.manager.services;
 
+import io.github.alberes.register.manager.constants.MessageConstants;
 import io.github.alberes.register.manager.domains.UserAccount;
 import io.github.alberes.register.manager.domains.UserPrincipal;
 import io.github.alberes.register.manager.repositories.UserAccountRepository;
@@ -32,7 +33,7 @@ public class UserAccountService implements GenericService{
     public UserAccount save(UserAccount userAccount){
         UserAccount userAccountDB = this.repository.findByEmail(userAccount.getEmail());
         if(userAccountDB != null){
-            throw new DuplicateRecordException("Registration with e-mail " + userAccount.getEmail() + " has already been registered!");
+            throw new DuplicateRecordException(MessageConstants.REGISTRATION_WITH_E_MAIL + userAccount.getEmail() + MessageConstants.HAS_ALREADY_BEEN_REGISTERED);
         }
         String password = this.encoder.encode(userAccount.getPassword());
         userAccount.setPassword(password);
@@ -43,7 +44,7 @@ public class UserAccountService implements GenericService{
     public UserAccount find(UUID id){
         Optional<UserAccount> optional = this.repository.findById(id);
         return optional.orElseThrow(() -> new ObjectNotFoundException(
-                "Object not found! Id: " + id.toString() + ", Type: " + UserAccount.class.getName()));
+                MessageConstants.OBJECT_NOT_FOUND_ID + id.toString() + MessageConstants.TYPE + UserAccount.class.getName()));
     }
 
     @Transactional

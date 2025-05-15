@@ -1,5 +1,6 @@
 package io.github.alberes.register.manager.filters;
 
+import io.github.alberes.register.manager.constants.MessageConstants;
 import io.github.alberes.register.manager.services.JWTService;
 import io.github.alberes.register.manager.services.UserPrincipalDetailsService;
 import jakarta.servlet.FilterChain;
@@ -27,11 +28,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authentication = request.getHeader("Authorization");
+        String authentication = request.getHeader(MessageConstants.AUTHORIZATION);
         String token = null;
         String username = null;
 
-        if(authentication != null && authentication.startsWith("Bearer ")){
+        if(authentication != null && authentication.startsWith(MessageConstants.BEARER)){
             token = authentication.substring(7);
             username = this.jwtService.extractUsername(token);
         }

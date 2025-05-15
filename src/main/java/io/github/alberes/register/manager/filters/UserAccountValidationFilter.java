@@ -2,6 +2,7 @@ package io.github.alberes.register.manager.filters;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import io.github.alberes.register.manager.constants.MessageConstants;
 import io.github.alberes.register.manager.controllers.exceptions.dto.StandardErrorDto;
 import io.github.alberes.register.manager.domains.UserPrincipal;
 import io.github.alberes.register.manager.utils.JsonUtils;
@@ -25,6 +26,8 @@ public class UserAccountValidationFilter extends OncePerRequestFilter {
 
     private static final String IGNORED_PATH = "/api/v1/users";
 
+    private static final String IGNORED_AUTHENTICATED_PATH = "/api/v1/users/authenticated";
+
     private final JsonUtils jsonUtils = new JsonUtils(new ObjectMapper()
             .registerModule(new JavaTimeModule()));
 
@@ -32,19 +35,19 @@ public class UserAccountValidationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
-        if(!IGNORED_PATH.equals(request.getRequestURI()) && !this.hasRoleAdmin(userPrincipal.getAuthorities())){
+        if(!IGNORED_AUTHENTICATED_PATH.equals(request.getRequestURI()) && !IGNORED_PATH.equals(request.getRequestURI()) && !this.hasRoleAdmin(userPrincipal.getAuthorities())){
             String id = extractUserId(request.getRequestURI());
-            if(!id.equals(userPrincipal.getId().toString())){
+            if(!id.equals(userPrincipal.getUserAccount().getId().toString())){
                 StandardErrorDto standardErrorDto =
                         new StandardErrorDto(System.currentTimeMillis(),
                                 HttpStatus.UNAUTHORIZED.value(),
-                                "Unauthorized", "The user can only access resources that belong to him.",
+                                MessageConstants.UNAUTHORIZED, MessageConstants.UNAUTHORIZED_MESSAGE,
                                 request.getRequestURI(),
                                 List.of()
                         );
                 response.setStatus(standardErrorDto.getStatus());
-                response.setCharacterEncoding("UTF-8");
-                response.setContentType("application/json");
+                response.setCharacterEncoding(MessageConstants.UTF_8);
+                response.setContentType(MessageConstants.APPLICATION_JSON);
                 response.getWriter().println(this.jsonUtils.toJson(standardErrorDto));
             }else{
                 filterChain.doFilter(request, response);
@@ -56,7 +59,7 @@ public class UserAccountValidationFilter extends OncePerRequestFilter {
 
     private boolean hasRoleAdmin(Collection<? extends GrantedAuthority> roles){
         for(GrantedAuthority r : roles){
-            if(r.getAuthority().equals("ROLE_ADMIN")){
+            if(r.getAuthority().equals(MessageConstants.ROLE_ADMIN)){
                 return true;
             }
         }
@@ -64,7 +67,7 @@ public class UserAccountValidationFilter extends OncePerRequestFilter {
     }
 
     private String extractUserId(String path){
-        return path.split("/")[4];
+        return path.split(MessageConstants.SLASH)[4];
     }
 
 }

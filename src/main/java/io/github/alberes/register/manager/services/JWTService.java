@@ -1,10 +1,13 @@
 package io.github.alberes.register.manager.services;
 
+import io.github.alberes.register.manager.constants.MessageConstants;
 import io.github.alberes.register.manager.controllers.dto.TokenDto;
+import io.github.alberes.register.manager.domains.UserPrincipal;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,11 @@ import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.*;
+import java.time.format.DateTimeFormatter;
+import java.util.Base64;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 @Service
@@ -25,26 +32,33 @@ public class JWTService {
     @Value("${app.session.expirationtime}")
     private int sessionExpiration;
 
+    @Autowired
+    private DateTimeFormatter formatter;
+
     public JWTService(){
         try {
-            KeyGenerator keyGenerator = KeyGenerator.getInstance("HmacSHA256");
+            KeyGenerator keyGenerator = KeyGenerator.getInstance(MessageConstants.HMACSHA256);
             SecretKey sk = keyGenerator.generateKey();
             this.secretKey = Base64.getEncoder().encodeToString(sk.getEncoded());
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-
     }
 
-    public TokenDto generateToken(String id, String username) {
+    public TokenDto generateToken(UserPrincipal userPrincipal) {
         Map<String, Object> claims = new HashMap<String, Object>();
+        claims.put(MessageConstants.ID, userPrincipal.getUserAccount().getId());
+        claims.put(MessageConstants.NAME, userPrincipal.getUserAccount().getName());
+        claims.put(MessageConstants.EMAIL, userPrincipal.getUserAccount().getEmail());
+        claims.put(MessageConstants.PROFILES, userPrincipal.getUserAccount().getRoles());
+        claims.put(MessageConstants.REGISTRATION_DATE, userPrincipal.getUserAccount().getCreatedDate().format(this.formatter));
         Date startDate = new Date(System.currentTimeMillis());
         LocalDateTime expirationDate = LocalDateTime.now().plusMinutes(this.sessionExpiration);
         Date expiration = Date.from(expirationDate.atZone(ZoneId.systemDefault()).toInstant());
-        return new TokenDto(id, Jwts.builder()
+        return new TokenDto(Jwts.builder()
                 .claims()
                 .add(claims)
-                .subject(username)
+                .subject(userPrincipal.getUserAccount().getEmail())
                 .issuedAt(startDate)
                 .expiration(expiration)
                 .and()
@@ -67,7 +81,7 @@ public class JWTService {
         return claimResolver.apply(claims);
     }
 
-    private Claims extractAllClaims(String token) {
+    public Claims extractAllClaims(String token) {
         return Jwts.parser()
                 .verifyWith(getKey())
                 .build()

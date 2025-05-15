@@ -13,8 +13,8 @@ public class UserPrincipal implements UserDetails {
 
     private final UserAccount userAccount;
 
-    public UUID getId(){
-        return userAccount.getId();
+    public UserAccount getUserAccount() {
+        return userAccount;
     }
 
     @Override
