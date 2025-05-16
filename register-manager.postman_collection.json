@@ -26,7 +26,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/api/v1/users/ded96ca1-3e64-4962-b1c1-3fbe63e24ba9/addresses/zipcode/06010171",
+							"raw": "http://localhost:8081/api/v1/users/:ID/addresses/zipcode/:CEP",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -36,14 +36,107 @@
 								"api",
 								"v1",
 								"users",
-								"ded96ca1-3e64-4962-b1c1-3fbe63e24ba9",
+								":ID",
 								"addresses",
 								"zipcode",
-								"06010171"
+								":CEP"
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": "f34b269e-b323-4f51-aa26-2836dbbeb76e",
+									"description": "Id do usuário"
+								},
+								{
+									"key": "CEP",
+									"value": "01310930",
+									"description": "CEP"
+								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "FIND_CEP_VIA_CEP_INVALID_200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/addresses/zipcode/:CEP",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"addresses",
+										"zipcode",
+										":CEP"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "f34b269e-b323-4f51-aa26-2836dbbeb76e",
+											"description": "Id do usuário"
+										},
+										{
+											"key": "CEP",
+											"value": "01310111",
+											"description": "CEP Inválido"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "FIND_CEP_VIA_CEP_CIDADE_UNICO_CPE_200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/addresses/zipcode/:CEP",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"addresses",
+										"zipcode",
+										":CEP"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "f34b269e-b323-4f51-aa26-2836dbbeb76e",
+											"description": "Id do usuário"
+										},
+										{
+											"key": "CEP",
+											"value": "12990000",
+											"description": "Cidade com único CEP"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "VIA_CEP_200",
@@ -95,7 +188,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"publicArea\": \"Avenida Hilário Pereira de Souza - afaf20fd-5d6c-491b-a4ff-7f2aa3cbc839\",\r\n    \"number\": 15,\r\n    \"additionalAddress\": \"\",\r\n    \"neighborhood\": \"Centro - afaf20fd-5d6c-491b-a4ff-7f2aa3cbc839\",\r\n    \"city\": \"Osasco\",\r\n    \"state\": \"SP\",\r\n    \"zipCode\": \"06010170\"\r\n}",
+							"raw": "{\r\n    \"publicArea\": \"Avenida Principal\",\r\n    \"number\": 15,\r\n    \"additionalAddress\": \"\",\r\n    \"neighborhood\": \"Centro\",\r\n    \"city\": \"São Paulo\",\r\n    \"state\": \"SP\",\r\n    \"zipCode\": \"01153000\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -103,7 +196,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/api/v1/users/afaf20fd-5d6c-491b-a4ff-7f2aa3cbc839/addresses",
+							"raw": "http://localhost:8081/api/v1/users/:ID/addresses",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -113,12 +206,356 @@
 								"api",
 								"v1",
 								"users",
-								"afaf20fd-5d6c-491b-a4ff-7f2aa3cbc839",
+								":ID",
 								"addresses"
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": "8363447e-7d42-47a7-832e-853b0fb8a38e",
+									"description": "Id do usuário"
+								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "CREATE_ADDRESS_USER_NOT_FOUND_404",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publicArea\": \"Avenida Principal\",\r\n    \"number\": 15,\r\n    \"additionalAddress\": \"\",\r\n    \"neighborhood\": \"Centro\",\r\n    \"city\": \"São Paulo\",\r\n    \"state\": \"SP\",\r\n    \"zipCode\": \"01153000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/addresses",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"addresses"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "4c4483aa-e2ea-4ec4-84c4-ff5c6e06c020",
+											"description": "Id do usuário que não exista na base"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_ADDRESS_PUBLICAREA_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"number\": 15,\r\n    \"additionalAddress\": \"\",\r\n    \"neighborhood\": \"Centro\",\r\n    \"city\": \"São Paulo\",\r\n    \"state\": \"SP\",\r\n    \"zipCode\": \"01153000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/addresses",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"addresses"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "05c7c42a-5bf1-44e0-b9bd-0ac69b8b06bb",
+											"description": "Id do usuário"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_ADDRESS_additionalAddress_200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publicArea\": \"Avenida Principal\",\r\n    \"number\": 15,\r\n    \"neighborhood\": \"Centro\",\r\n    \"city\": \"São Paulo\",\r\n    \"state\": \"SP\",\r\n    \"zipCode\": \"01153000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/addresses",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"addresses"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "05c7c42a-5bf1-44e0-b9bd-0ac69b8b06bb",
+											"description": "Id do usuário"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_ADDRESS_NUMBER_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publicArea\": \"Avenida Principal\",\r\n    \"additionalAddress\": \"\",\r\n    \"neighborhood\": \"Centro\",\r\n    \"city\": \"São Paulo\",\r\n    \"state\": \"SP\",\r\n    \"zipCode\": \"01153000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/addresses",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"addresses"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "05c7c42a-5bf1-44e0-b9bd-0ac69b8b06bb",
+											"description": "Id do usuário"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_ADDRESS_neighborhood_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publicArea\": \"Avenida Principal\",\r\n    \"number\": 15,\r\n    \"additionalAddress\": \"\",\r\n    \"city\": \"São Paulo\",\r\n    \"state\": \"SP\",\r\n    \"zipCode\": \"01153000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/addresses",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"addresses"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "05c7c42a-5bf1-44e0-b9bd-0ac69b8b06bb",
+											"description": "Id do usuário"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_ADDRESS_city_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publicArea\": \"Avenida Principal\",\r\n    \"number\": 15,\r\n    \"additionalAddress\": \"\",\r\n    \"neighborhood\": \"Centro\",\r\n    \"state\": \"SP\",\r\n    \"zipCode\": \"01153000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/addresses",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"addresses"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "05c7c42a-5bf1-44e0-b9bd-0ac69b8b06bb",
+											"description": "Id do usuário"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_ADDRESS_STATE_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publicArea\": \"Avenida Principal\",\r\n    \"number\": 15,\r\n    \"additionalAddress\": \"\",\r\n    \"neighborhood\": \"Centro\",\r\n    \"city\": \"São Paulo\",\r\n    \"zipCode\": \"01153000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/addresses",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"addresses"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "05c7c42a-5bf1-44e0-b9bd-0ac69b8b06bb",
+											"description": "Id do usuário"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_ADDRESS_ZIPCODE_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publicArea\": \"Avenida Principal\",\r\n    \"number\": 15,\r\n    \"additionalAddress\": \"\",\r\n    \"neighborhood\": \"Centro\",\r\n    \"city\": \"São Paulo\",\r\n    \"state\": \"SP\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/addresses",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"addresses"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "05c7c42a-5bf1-44e0-b9bd-0ac69b8b06bb",
+											"description": "Id do usuário"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "UPDATE_ADDRESS_204",
@@ -137,7 +574,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"publicArea\": \"Avenida Hilário Pereira de Souza updated\",\r\n    \"number\": 16,\r\n    \"additionalAddress\": \"updated\",\r\n    \"neighborhood\": \"Centro  updated\",\r\n    \"city\": \"Osasco  updated\",\r\n    \"state\": \"SC\",\r\n    \"zipCode\": \"06010171\"\r\n}",
+							"raw": "{\r\n    \"publicArea\": \"Avenida Principal\",\r\n    \"number\": 16,\r\n    \"additionalAddress\": \"updated\",\r\n    \"neighborhood\": \"Centro  updated\",\r\n    \"city\": \"Osasco  updated\",\r\n    \"state\": \"SC\",\r\n    \"zipCode\": \"06010171\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -145,7 +582,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/api/v1/users/c1aba828-3636-4140-92f0-33c218c325d0/addresses/563cc879-05ec-45bf-82ed-4a8ac7e6cf35",
+							"raw": "http://localhost:8081/api/v1/users/:ID/addresses/:ADDRESSID",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -155,50 +592,77 @@
 								"api",
 								"v1",
 								"users",
-								"c1aba828-3636-4140-92f0-33c218c325d0",
+								":ID",
 								"addresses",
-								"563cc879-05ec-45bf-82ed-4a8ac7e6cf35"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE_ADDRESS_204",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
+								":ADDRESSID"
+							],
+							"variable": [
 								{
-									"key": "token",
-									"value": "{{REGISTER_MANAGER_TOKEN}}",
-									"type": "string"
+									"key": "ID",
+									"value": "05c7c42a-5bf1-44e0-b9bd-0ac69b8b06bb",
+									"description": "Id do usuário"
+								},
+								{
+									"key": "ADDRESSID",
+									"value": "d9809b69-2e79-4ec4-8989-d183fe9d3549",
+									"description": "Id do endereço"
 								}
 							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8081/api/v1/users/c1aba828-3636-4140-92f0-33c218c325d0/addresses/563cc879-05ec-45bf-82ed-4a8ac7e6cf35",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"users",
-								"c1aba828-3636-4140-92f0-33c218c325d0",
-								"addresses",
-								"563cc879-05ec-45bf-82ed-4a8ac7e6cf35"
-							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "UPDATE_ADDRESS_USER_404",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publicArea\": \"Avenida Principal\",\r\n    \"number\": 16,\r\n    \"additionalAddress\": \"updated\",\r\n    \"neighborhood\": \"Centro  updated\",\r\n    \"city\": \"Osasco  updated\",\r\n    \"state\": \"SC\",\r\n    \"zipCode\": \"06010171\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/addresses/:ADDRESSID",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"addresses",
+										":ADDRESSID"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "8363447e-7d42-47a7-832e-853b0fb8abcde",
+											"description": "Id do usuário que não exista na base"
+										},
+										{
+											"key": "ADDRESSID",
+											"value": "fdd90ce0-a5f1-4395-b578-f83993b83760",
+											"description": "Id do endereço que não exista na base"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
-					"name": "FIND_ADDRESS_200",
+					"name": "FIND_ADDRESS_204",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -213,7 +677,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/api/v1/users/c1aba828-3636-4140-92f0-33c218c325d0/addresses/af60ecef-a1b0-4cdc-8f83-05369ce28d8e",
+							"raw": "http://localhost:8081/api/v1/users/:ID/addresses/:ADDRESSID",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -223,13 +687,151 @@
 								"api",
 								"v1",
 								"users",
-								"c1aba828-3636-4140-92f0-33c218c325d0",
+								":ID",
 								"addresses",
-								"af60ecef-a1b0-4cdc-8f83-05369ce28d8e"
+								":ADDRESSID"
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": "8363447e-7d42-47a7-832e-853b0fb8a38e",
+									"description": "Id do usuário"
+								},
+								{
+									"key": "ADDRESSID",
+									"value": "de6f4cde-ffc8-4156-b747-df55f2476c2f",
+									"description": "Id do endereço"
+								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "FIND_ADDRESS_204",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/addresses/:ADDRESSID",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"addresses",
+										":ADDRESSID"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "8363447e-7d42-47a7-832e-853b0fb8a38e",
+											"description": "Id do usuário"
+										},
+										{
+											"key": "ADDRESSID",
+											"value": "de6f4cde-ffc8-4156-b747-df55f2476c2aa",
+											"description": "Id do endereço"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "DELETE_ADDRESS_200",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{REGISTER_MANAGER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/v1/users/:ID/addresses/:ADDRESSID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":ID",
+								"addresses",
+								":ADDRESSID"
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": "8363447e-7d42-47a7-832e-853b0fb8a38e",
+									"description": "Id do usuário"
+								},
+								{
+									"key": "ADDRESSID",
+									"value": "19e96810-a0f6-46a1-9b07-4509d3d85f85",
+									"description": "Id do endereço"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE_ADDRESS_404",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/addresses/:ADDRESSID",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"addresses",
+										":ADDRESSID"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "8363447e-7d42-47a7-832e-853b0fb8a38e",
+											"description": "Id do usuário"
+										},
+										{
+											"key": "ADDRESSID",
+											"value": "19e96810-a0f6-46a1-9b07-4509d3d85f85",
+											"description": "Id do endereço que não exista na base"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "FIND_PAGE_ADDRESSES_200",
@@ -247,7 +849,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/api/v1/users/a0004173-37b3-414c-b6f9-5c76c2718f74/addresses?page=0&linesPerPage=10&orderBy=publicArea&direction=ASC",
+							"raw": "http://localhost:8081/api/v1/users/:ID/addresses?page=0&linesPerPage=24&orderBy=publicArea&direction=ASC",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -257,30 +859,97 @@
 								"api",
 								"v1",
 								"users",
-								"a0004173-37b3-414c-b6f9-5c76c2718f74",
+								":ID",
 								"addresses"
 							],
 							"query": [
 								{
 									"key": "page",
-									"value": "0"
+									"value": "0",
+									"description": "Primeira página"
 								},
 								{
 									"key": "linesPerPage",
-									"value": "10"
+									"value": "24",
+									"description": "Quantidade de registro retornado"
 								},
 								{
 									"key": "orderBy",
-									"value": "publicArea"
+									"value": "publicArea",
+									"description": "Campo de ordenação"
 								},
 								{
 									"key": "direction",
-									"value": "ASC"
+									"value": "ASC",
+									"description": "Direção da ordenação"
+								}
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": "8363447e-7d42-47a7-832e-853b0fb8a38e",
+									"description": "Id do usuário"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "FIND_PAGE_ADDRESSES_204",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/addresses?page=20&linesPerPage=24&orderBy=publicArea&direction=ASC",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"addresses"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "20",
+											"description": "Primeira página"
+										},
+										{
+											"key": "linesPerPage",
+											"value": "24",
+											"description": "Quantidade de registro retornado"
+										},
+										{
+											"key": "orderBy",
+											"value": "publicArea",
+											"description": "Campo de ordenação"
+										},
+										{
+											"key": "direction",
+											"value": "ASC",
+											"description": "Direção da ordenação"
+										}
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "8363447e-7d42-47a7-832e-853b0fb8a38e",
+											"description": "Id do usuário"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				}
 			]
 		},
@@ -765,7 +1434,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Posteman User\",\r\n    \"email\": \"postman@postman.com\",\r\n    \"password\": \"postman123456\",\r\n    \"role\": \"USER\"\r\n}",
+							"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"email\": \"user@user.com\",\r\n    \"password\": \"user123456\",\r\n    \"role\": \"USER\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -786,7 +1455,338 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "CREATE_USER__EMAIL_409",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Posteman User\",\r\n    \"email\": \"postman@postman.com\",\r\n    \"password\": \"postman123456\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_NAME_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test\",\r\n    \"email\": \"user@user.com\",\r\n    \"password\": \"user123456\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_EMAIL_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"email\": \"useruser.com\",\r\n    \"password\": \"user123456\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_PASSWORD_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"email\": \"user@user.com\",\r\n    \"password\": \"user123\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_ROLE_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"email\": \"user@user.com\",\r\n    \"password\": \"user123456\",\r\n    \"role\": \"US\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_EMAIL_OBLIGATORY",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"password\": \"user123456\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_NAME_OBLIGATORY_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"user@user.com\",\r\n    \"password\": \"user123456\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_PASSWORD_OBRIGATORY_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"email\": \"user@user.com\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_ROLE_OBLIGATORY_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"email\": \"user@user.com\",\r\n    \"password\": \"user123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CREATE_USER_ROLE_400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User Test Data\",\r\n    \"email\": \"user@user.com\",\r\n    \"password\": \"user123456\",\r\n    \"role\": \"US\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "FIND_USER_200",
@@ -804,7 +1804,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/api/v1/users/832a6107-9f3b-442c-9245-509f65222a7c",
+							"raw": "http://localhost:8081/api/v1/users/:ID",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -814,11 +1814,51 @@
 								"api",
 								"v1",
 								"users",
-								"832a6107-9f3b-442c-9245-509f65222a7c"
+								":ID"
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": "4c4483aa-e2ea-4ec4-84c4-ff5c6e06c020",
+									"description": "Colocar um id que exista no banco de dados\n"
+								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "FIND_USER_404",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "4c4483aa-e2ea-4ec4-84c4-ff5c6e06c021",
+											"description": "Colocar um id que não exista no banco de dados"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "UPDATE_USER_204",
@@ -845,7 +1885,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/api/v1/users/6c96d5e1-154a-47b4-be80-f5fa52dff7c8",
+							"raw": "http://localhost:8081/api/v1/users/:ID",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -855,11 +1895,101 @@
 								"api",
 								"v1",
 								"users",
-								"6c96d5e1-154a-47b4-be80-f5fa52dff7c8"
+								":ID"
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": "4c4483aa-e2ea-4ec4-84c4-ff5c6e06c020",
+									"description": "Colocar um id que exista no banco de dados"
+								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "UPDATE_USER_404",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"user 1 register updated\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "4c4483aa-e2ea-4ec4-84c4-ff5c6e06c021",
+											"description": "Colocar um id que não exista no banco de dados"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "UPDATE_USER_NAME_400",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name1\": \"user 1 register updated\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "4c4483aa-e2ea-4ec4-84c4-ff5c6e06c020",
+											"description": "Colocar um id que exista no banco de dados"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "DELETE_USER_204",
@@ -877,7 +2007,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/api/v1/users/2f1b0851-f200-4056-9e64-83fd48155a94",
+							"raw": "http://localhost:8081/api/v1/users/:ID",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -887,11 +2017,51 @@
 								"api",
 								"v1",
 								"users",
-								"2f1b0851-f200-4056-9e64-83fd48155a94"
+								":ID"
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": "4c4483aa-e2ea-4ec4-84c4-ff5c6e06c020",
+									"description": "Colocar um id que exista no banco de dados"
+								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "DELETE_USER_404",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "4c4483aa-e2ea-4ec4-84c4-ff5c6e06c020",
+											"description": "Colocar um id que não exista no banco de dados"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "CREATE_USER_ADMIN_201",
@@ -934,7 +2104,7 @@
 					"response": []
 				},
 				{
-					"name": "FIND_USER_PAGE",
+					"name": "FIND_USER_PAGE_ROLE_ADMIN",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -949,7 +2119,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/api/v1/users/09bf350f-b290-4bb7-8154-7900612b0e32/all?page=0&linesPerPage=24&orderBy=name&direction=ASC",
+							"raw": "http://localhost:8081/api/v1/users/:ID/all?page=0&linesPerPage=24&orderBy=name&direction=ASC",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -959,30 +2129,97 @@
 								"api",
 								"v1",
 								"users",
-								"09bf350f-b290-4bb7-8154-7900612b0e32",
+								":ID",
 								"all"
 							],
 							"query": [
 								{
 									"key": "page",
-									"value": "0"
+									"value": "0",
+									"description": "Primeira página"
 								},
 								{
 									"key": "linesPerPage",
-									"value": "24"
+									"value": "24",
+									"description": "Quantidade de registro retornado"
 								},
 								{
 									"key": "orderBy",
-									"value": "name"
+									"value": "name",
+									"description": "Campo de ordenação"
 								},
 								{
 									"key": "direction",
-									"value": "ASC"
+									"value": "ASC",
+									"description": "Direção da ordenação"
+								}
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": "f34b269e-b323-4f51-aa26-2836dbbeb76e",
+									"description": "ID de usuário com ROLE ADMIN"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "FIND_USER_PAGE_ROLE_USER",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/api/v1/users/:ID/all?page=0&linesPerPage=24&orderBy=name&direction=ASC",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										":ID",
+										"all"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0",
+											"description": "Primeira página"
+										},
+										{
+											"key": "linesPerPage",
+											"value": "24",
+											"description": "Quantidade de registro retornado"
+										},
+										{
+											"key": "orderBy",
+											"value": "name",
+											"description": "Campo de ordenação"
+										},
+										{
+											"key": "direction",
+											"value": "ASC",
+											"description": "Direção da ordenação"
+										}
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "f34b269e-b323-4f51-aa26-2836dbbeb76e",
+											"description": "ID de usuário com ROLE ADMIN"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "AUTHENTICATED_USER",
