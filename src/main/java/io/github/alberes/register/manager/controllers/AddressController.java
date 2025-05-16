@@ -44,7 +44,7 @@ public class AddressController implements GenericController{
     @PreAuthorize(MessageConstants.HAS_ROLE_ADMIN_USER)
     public ResponseEntity<AddressReportDto> find(@PathVariable String userId, @PathVariable String id){
         UUID addressId = UUID.fromString(id);
-        Address address = this.service.find(addressId);
+        Address address = this.service.find(UUID.fromString(userId), addressId);
         AddressReportDto dto = this.mapper.toDto(address);
         return ResponseEntity.ok(dto);
     }
@@ -55,6 +55,8 @@ public class AddressController implements GenericController{
         Address address = this.mapper.toEntity(dto);
         UUID addressId = UUID.fromString(id);
         address.setId(addressId);
+        address.setUserAccount(new UserAccount());
+        address.getUserAccount().setId(UUID.fromString(userId));
         this.service.update(address);
         return ResponseEntity.noContent().build();
     }
@@ -63,7 +65,7 @@ public class AddressController implements GenericController{
     @PreAuthorize(MessageConstants.HAS_ROLE_ADMIN_USER)
     public ResponseEntity<Void> delete(@PathVariable String userId, @PathVariable String id){
         UUID addressId = UUID.fromString(id);
-        this.service.delete(addressId);
+        this.service.delete(UUID.fromString(userId), addressId);
         return ResponseEntity.noContent().build();
     }
 

@@ -2,7 +2,6 @@ package io.github.alberes.register.manager.services;
 
 import io.github.alberes.register.manager.domains.Address;
 import io.github.alberes.register.manager.domains.UserAccount;
-import io.github.alberes.register.manager.domains.UserPrincipal;
 import io.github.alberes.register.manager.repositories.AddressRepository;
 import io.github.alberes.register.manager.services.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,7 +33,8 @@ public class AddressService implements GenericService{
     }
 
     @Transactional
-    public Address find(UUID id){
+    public Address find(UUID userId, UUID id){
+        this.userAccountService.find(userId);
         Optional<Address> optional = this.repository.findById(id);
         return optional.orElseThrow(()-> new ObjectNotFoundException(
                 "Object not found! Id: " + id.toString() + ", Type: " + Address.class.getName()
@@ -46,7 +44,7 @@ public class AddressService implements GenericService{
     @Transactional
     @Modifying
     public void update(Address address){
-        Address addressDB = this.find(address.getId());
+        Address addressDB = this.find(address.getUserAccount().getId(), address.getId());
         address.setUserAccount(addressDB.getUserAccount());
         address.setCreatedDate(addressDB.getCreatedDate());
         this.repository.save(address);
@@ -54,13 +52,14 @@ public class AddressService implements GenericService{
 
     @Transactional
     @Modifying
-    public void delete(UUID id){
-        this.find(id);
+    public void delete(UUID userId, UUID id){
+        this.find(userId, id);
         this.repository.deleteById(id);
     }
 
     @Transactional
     public Page<Address> findPage(UUID userId, Integer page, Integer linesPerPage, String orderBy, String direction) {
+        this.userAccountService.find(userId);
         return this.repository.findByUserAccountId(userId, PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy));
     }
 
